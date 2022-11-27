@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+const { app, BrowserWindow } = require('electron');
 
 const createWindow = () => {
 	const win = new BrowserWindow({
@@ -7,6 +7,7 @@ const createWindow = () => {
 	});
 
 	win.loadFile('index.html');
+	win.menuBarVisible = false;
 };
 
 app.whenReady().then(() => {
