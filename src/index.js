@@ -1,13 +1,14 @@
 const { app, BrowserWindow } = require('electron');
 
 const createWindow = () => {
-	const win = new BrowserWindow({
+	const screen = new BrowserWindow({
 		width: 800,
 		height: 600,
+		backgroundColor: '#gff55d',
 	});
 
-	win.loadFile('index.html');
-	win.menuBarVisible = false;
+	screen.loadFile(`${__dirname}/index.html`);
+	screen.menuBarVisible = false;
 };
 
 app.whenReady().then(() => {
