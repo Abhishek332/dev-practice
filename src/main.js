@@ -1,8 +1,7 @@
 const { app, BrowserWindow, Menu } = require("electron");
 const menuOptions = require("./components/menuOptions");
 const path = require("path");
-
-const isMac = process.platform === "darwin";
+const isMac = require("./utlis/isMac");
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -45,7 +44,7 @@ app.whenReady().then(() => {
 });
 
 app.on("window-all-closed", () => {
-  if (!isMac) {
+  if (!isMac()) {
     app.quit();
   }
 });

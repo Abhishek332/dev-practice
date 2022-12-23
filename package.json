@@ -1,5 +1,5 @@
 {
-  "name": "Hostify",
+  "name": "Simplify",
   "version": "1.0.0",
   "description": "",
   "main": "src/main.js",
@@ -7,7 +7,7 @@
     "start": "electron ."
   },
   "keywords": [],
-  "author": "",
+  "author": "Abhishek Porwal",
   "license": "ISC",
   "devDependencies": {
     "electron": "^21.3.1"
