@@ -10,11 +10,19 @@
 
 <body>
     <h2>Make your localhost live</h2>
-    <form action="createSubdomain" method="get">
-        <input type="text" id="ePort" placeholder="Enter port number">
-        <input type="text" id="eSubdomain" placeholder="Enter a subdomain name">
-        <button>Start</button>
+    <form onsubmit="return false" method="get">
+        <input type="text" id="ePort" name="ePort" placeholder="Enter port number">
+        <input type="text" id="eSubdomain" name="eSubdomain" placeholder="Enter a subdomain name">
+        <button onclick="createSubdomain()">Start</button>
     </form>
+    <script>
+        const createSubdomain = () => {
+            const ePort = document.forms[0].elements['ePort'].value;
+            const eSubdomain = document.forms[0].elements['eSubdomain'].value;
+
+
+        }
+    </script>
 </body>
 
 </html>
