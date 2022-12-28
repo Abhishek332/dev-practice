@@ -1,6 +1,5 @@
 const isMac = require("../utils/isMac");
 const { BrowserWindow } = require("electron");
-let { childWindowCounter } = require("../main");
 
 const webHoster = () => {
   const win = new BrowserWindow({
@@ -10,7 +9,6 @@ const webHoster = () => {
   });
   win.removeMenu();
   win.loadFile(`${__dirname}/webHoster.html`);
-  childWindowCounter = childWindowCounter + 1;
 };
 
 const menuOptions = [
