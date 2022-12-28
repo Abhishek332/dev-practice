@@ -1,5 +1,17 @@
-const { app } = require("electron");
-const isMac = require("../utlis/isMac");
+const isMac = require("../utils/isMac");
+const { BrowserWindow } = require("electron");
+let { childWindowCounter } = require("../main");
+
+const webHoster = () => {
+  const win = new BrowserWindow({
+    width: 400,
+    height: 250,
+    frame: false,
+  });
+  win.removeMenu();
+  win.loadFile(`${__dirname}/webHoster.html`);
+  childWindowCounter = childWindowCounter + 1;
+};
 
 const menuOptions = [
   {
@@ -9,7 +21,10 @@ const menuOptions = [
   {
     label: "Host Web",
     submenu: [
-      { label: "New Host" },
+      {
+        label: "New Host",
+        click: webHoster,
+      },
       { type: "separator" },
       { label: "See Hosts" },
     ],

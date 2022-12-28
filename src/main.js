@@ -1,12 +1,12 @@
 const { app, BrowserWindow, Menu } = require("electron");
 const menuOptions = require("./components/menuOptions");
 const path = require("path");
-const isMac = require("./utlis/isMac");
+const isMac = require("./utils/isMac");
 const electronReload = require("electron-reload");
 
 electronReload(__dirname, {
-  electron : path.join(__dirname, "../node_modules/")
-})
+  electron: path.join(__dirname, "../node_modules/"),
+});
 
 function createWindow() {
   const win = new BrowserWindow({
