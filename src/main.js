@@ -1,5 +1,5 @@
 const { app, BrowserWindow, Menu } = require("electron");
-const menuOptions = require("./components/menuOptions");
+const menuOptions = require("./menuOptions");
 const path = require("path");
 const isMac = require("./utils/isMac");
 const electronReload = require("electron-reload");
@@ -8,17 +8,17 @@ electronReload(__dirname, {
   electron: path.join(__dirname, "../node_modules/"),
 });
 
+let mainWindow;
 function createWindow() {
-  const win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
   });
-
-  win.loadFile(`${__dirname}/index.html`);
-  win.removeMenu();
+  mainWindow.loadFile(path.join(__dirname, "main.html"));
+  mainWindow.removeMenu();
 
   //Creating Menu
   const menu = Menu.buildFromTemplate(menuOptions);
@@ -38,14 +38,12 @@ function createWindow() {
   // });
 }
 
-app.whenReady().then(() => {
-  createWindow();
+app.on("ready", () => createWindow());
 
-  app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
-  });
+app.on("activate", () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
 });
 
 app.on("window-all-closed", () => {
@@ -53,3 +51,5 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
+
+exports = mainWindow;
