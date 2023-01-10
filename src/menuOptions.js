@@ -1,16 +1,14 @@
 const isMac = require("./utils/isMac");
 const { BrowserWindow } = require("electron");
 const path = require("path");
-const mainWindow = require("./main");
 
 const webHoster = () => {
   const win = new BrowserWindow({
     width: 400,
     height: 250,
-    parent: mainWindow,
     modal: true,
-    preload: path.join(__dirname, "preload.js"),
-    // frame: false,
+
+    frame: false,
   });
   // win.removeMenu();
   win.loadFile(path.join(__dirname, "webHoster.html"));

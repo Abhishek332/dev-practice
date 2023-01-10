@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu } = require("electron");
+const { app, BrowserWindow, Menu, dialog } = require("electron");
 const menuOptions = require("./menuOptions");
 const path = require("path");
 const isMac = require("./utils/isMac");
@@ -8,9 +8,8 @@ electronReload(__dirname, {
   electron: path.join(__dirname, "../node_modules/"),
 });
 
-let mainWindow;
 function createWindow() {
-  mainWindow = new BrowserWindow({
+  const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -23,6 +22,11 @@ function createWindow() {
   //Creating Menu
   const menu = Menu.buildFromTemplate(menuOptions);
   Menu.setApplicationMenu(menu);
+
+  mainWindow.on("close", (e) => {
+    if (BrowserWindow.getAllWindows().length > 1) e.preventDefault();
+    console.log("first close all child windows");
+  });
 
   // ipcMain.handle('dark-mode:toggle', () => {
   // 	if (nativeTheme.shouldUseDarkColors) {
@@ -38,7 +42,9 @@ function createWindow() {
   // });
 }
 
-app.on("ready", () => createWindow());
+app.on("ready", () => {
+  createWindow();
+});
 
 app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
@@ -51,5 +57,3 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
-
-exports = mainWindow;
