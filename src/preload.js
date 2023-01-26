@@ -1,12 +1,13 @@
 const { contextBridge } = require('electron');
+const localtunnel = require('localtunnel');
 contextBridge.exposeInMainWorld('features', {
-	createSubdomain,
+  createSubdomain,
 });
 
-function createSubdomain(port, subdomain) {
-	console.log('Host Successful : ', port, subdomain);
-	//  const tunnel = await localtunnel({
-	//    port: Number(port),
-	//    subdomain,
-	//  });
+async function createSubdomain(port, subdomain) {
+  const tunnel = await localtunnel({
+    port: Number(port),
+    subdomain,
+  });
+  console.log('Host Successful: ', tunnel.url);
 }
